@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+
+        
+        function submitForm(){
+            let formData = getFormValues();
+
+            if(validateForm(formData))
+            {
+                window.open('summary.html?' + convertToQueryString(formData));
+            }
+        }
+
+        function validateForm(formData){
+
+            if(formData.name == "")
+            {
+                alert("Enter a Valid Name");
+                return false;
+            }
+            if(formData.email == "")
+            {
+                alert("Enter a Valid Email");
+                return false;
+            }
+            if(formData.date == "")
+            {
+                alert("Enter a Valid Date");
+                return false;
+            }
+            if(formData.interest == "")
+            {
+                alert("Please select interest");
+                return false;
+            }
+            if(formData.type == ""){
+                alert("Please select as an individual/organization");
+                return false;
+            }
+
+            return true;
+            }
+
+        function getFormValues(){
+            let form = {} ;
+            form.name = document.getElementById('name').value;
+            form.email = document.getElementById('email').value;
+            form.date = document.getElementById('dob').value;
+            //form.interest = document.getElementById('interest').selectedOptions[0].value;  
+            var e = document.getElementById('interest');
+            form.interest = e.options[e.selectedIndex].text;
+            
+            form.type = document.querySelector('input[name="type"]:checked');
+            form.aboutYou = document.getElementById('desc').value;
+
+            return form;
+        }
+
+        
+        
+        function convertToQueryString(formData)
+        {
+            var str = [];
+            for (var p in formData)
+            {
+                if (formData.hasOwnProperty(p))
+                {
+                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(formData[p]));
+                }
+            }
+            return str.join("&");
+        }
+
+        
+
+    </script>
+</head>
+<body>
+    
+        <h2>Fill your Interests</h2>
+        <div class="form">
+            <form>
+                <label for="name">Name</label><br><br>
+                <input type="text" name="name" id="name"  placeholder="Enter your name" /><br><br>
+                <label for="email">Email</label><br><br>
+                <input type="email" name="email" id="email"  placeholder="Enter your email" /><br><br>
+                <label for="dob">DOB</label><br><br>
+                <input type="date"  id="dob" name="DOB"/><br><br>
+                <label for="interest">Select your Interest</label><br><br>
+                <select id="interest">
+                    <option>Greenery</option>
+                    <option>Hills</option>
+                    <option>Buildings</option>
+                </select ><br><br>
+               
+                <input type="radio" name="type" id="organization" value="Organization" >
+                <label for="organization" >Organization</label>
+                <input type="radio" name="type" id="individual" value="Individual">
+                <label for="individual"  >Individual</label>
+
+
+                <br><br>
+                <label for="desc">About You <i>(optional)</i></label><br>
+                <textarea id="desc"></textarea><br><br>
+                <button type="button" onclick="submitForm()">Send Details</button>
+            </form>
+        </div>
+</body>    
+   
