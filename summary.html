@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Summary.html</title> 
+</head>
+<body>
+    <table>
+        <tr>
+            <td>Name:</td>
+            <td id="name"></td>
+        </tr>
+        <tr>
+            <td>Email:</td>
+            <td id="email"></td>
+        </tr>
+        <tr>
+            <td>Date of Birth:</td>
+            <td id="dob"></td>
+        </tr>
+        <tr>
+            <td>Interest:</td>
+            <td id="interest"></td>
+        </tr>
+        <tr>
+            <td>Type:</td>
+            <td id="type"></td>
+        </tr>
+        <tr>
+            <td>Description:</td>
+            <td id="more"></td>
+        </tr>
+    </table>
+
+        <script>
+            var data = queryDataValues();
+            queryDataToForm(data);
+    
+            function queryDataValues()
+            {
+    
+                const urlParams = new URLSearchParams(window.location.search);
+    
+                let queryData = {};
+                queryData.name = urlParams.get('name');
+                queryData.email = urlParams.get('email');
+                queryData.date = urlParams.get('date');
+                queryData.interest = urlParams.get('interest');
+                queryData.type = urlParams.get("type");
+                
+                queryData.aboutYou = urlParams.get('aboutYou');
+    
+                return queryData;
+            }
+            
+            function queryDataToForm(queryData)
+            {
+                document.getElementById('name').innerHTML = queryData.name;
+                document.getElementById('email').innerHTML = queryData.email;
+                document.getElementById('dob').innerHTML = queryData.date;
+                document.getElementById('interest').innerHTML = queryData.interest;
+                document.getElementById("type").innerHTML = queryData.type;
+    
+                document.getElementById('more').innerHTML = queryData.aboutYou;
+            }
+            
+        </script>   
+
+
+    
+</body>
+</html>
